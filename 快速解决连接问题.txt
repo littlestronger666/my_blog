@@ -1,0 +1,54 @@
+# 快速解决 GitHub 连接问题
+
+## 方案 1: 配置代理（如果你使用代理软件）
+
+复制粘贴执行（将 7890 改成你的代理端口）：
+
+git config --global http.proxy http://127.0.0.1:7890
+git config --global https.proxy http://127.0.0.1:7890
+git pull origin main --rebase
+git add .
+git commit -m "Fix deployment"
+git push origin main
+
+## 方案 2: 不使用代理
+
+复制粘贴执行：
+
+git config --global --unset http.proxy
+git config --global --unset https.proxy
+git pull origin main --rebase
+git add .
+git commit -m "Fix deployment"
+git push origin main
+
+## 方案 3: 强制推送（会覆盖远程更改）
+
+复制粘贴执行：
+
+git add .
+git commit -m "Fix deployment"
+git push origin main --force
+
+## 方案 4: 使用 SSH
+
+复制粘贴执行：
+
+git remote set-url origin git@github.com:littlestronger666/my_blog.git
+git pull origin main --rebase
+git add .
+git commit -m "Fix deployment"
+git push origin main
+
+## 如何查看代理端口？
+
+1. 打开你的代理软件（Clash/V2Ray/SSR）
+2. 查看设置中的 HTTP 代理端口
+3. 常见端口：7890、10809、1080
+
+## 推荐顺序
+
+1. 先试方案 1（如果使用代理）
+2. 不行试方案 2（如果不使用代理）
+3. 还不行试方案 3（强制推送）
+4. 最后试方案 4（SSH）
