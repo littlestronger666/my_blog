@@ -8,8 +8,8 @@ title: '联系我'
 
 ## 联系方式
 
-- GitHub: [你的 GitHub 用户名]
-- Email: your.email@example.com
+- GitHub: littlestronger666
+- Email: ilovefreedom6666@gmail.com
 
 ## 留言
 

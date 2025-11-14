@@ -11,10 +11,10 @@ export default function Comments() {
       <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">评论</h3>
       <Giscus
         id="comments"
-        repo="YOUR_GITHUB_USERNAME/YOUR_REPO_NAME"
-        repoId="YOUR_REPO_ID"
+        repo="littlestronger666/my_blog"
+        repoId="R_kgDOQVgM7Q"
         category="Announcements"
-        categoryId="YOUR_CATEGORY_ID"
+        categoryId="DIC_kwDOQVgM7c4CxyLj"
         mapping="pathname"
         reactionsEnabled="1"
         emitMetadata="0"
