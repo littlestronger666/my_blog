@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>测试暗色模式</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class'
+    }
+  </script>
+</head>
+
+<body class="p-8">
+  <div class="max-w-2xl mx-auto">
+    <h1 class="text-3xl font-bold mb-4 text-gray-900 dark:text-white">暗色模式测试</h1>
+
+    <div class="mb-4">
+      <button onclick="toggleDarkMode()" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+        切换主题
+      </button>
+    </div>
+
+    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+      <h2 class="text-xl font-semibold mb-2 text-gray-900 dark:text-white">测试卡片</h2>
+      <p class="text-gray-600 dark:text-gray-400">
+        这是一段测试文字。如果暗色模式工作正常，切换主题时这段文字的颜色应该会改变。
+      </p>
+    </div>
+
+    <div class="mt-4 p-4 bg-gray-100 dark:bg-gray-700 rounded">
+      <p class="text-sm text-gray-700 dark:text-gray-300">
+        当前 HTML class: <span id="htmlClass" class="font-mono"></span>
+      </p>
+    </div>
+  </div>
+
+  <script>
+    function toggleDarkMode() {
+      const html = document.documentElement;
+      if (html.classList.contains('dark')) {
+        html.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+      } else {
+        html.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      }
+      updateDisplay();
+    }
+
+    function updateDisplay() {
+      const htmlClass = document.documentElement.className || '(无)';
+      document.getElementById('htmlClass').textContent = htmlClass;
+    }
+
+    // 初始化
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      document.documentElement.classList.add('dark');
+    }
+    updateDisplay();
+  </script>
+</body>
+
+</html>
