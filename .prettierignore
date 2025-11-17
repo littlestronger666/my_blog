@@ -1,0 +1,9 @@
+# Ignore Markdown files to prevent auto-formatting
+_posts/**/*.md
+_pages/**/*.md
+*.md
+
+# Ignore build output
+.next/
+out/
+node_modules/

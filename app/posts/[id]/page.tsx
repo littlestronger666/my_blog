@@ -21,7 +21,7 @@ export default async function Post({ params }: { params: Promise<{ id: string }>
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="flex flex-col md:flex-row gap-8">
           <main className="w-full md:w-3/4">
-            <article className="prose prose-lg dark:prose-invert max-w-none">
+            <article>
               <div className="mb-8">
                 <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white">{postData.title}</h1>
                 <div className="flex items-center gap-4 text-gray-600 dark:text-gray-400">
@@ -37,7 +37,7 @@ export default async function Post({ params }: { params: Promise<{ id: string }>
                 </div>
               </div>
               <div 
-                className="prose-headings:text-gray-900 dark:prose-headings:text-white prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-code:text-gray-900 dark:prose-code:text-gray-100 prose-pre:bg-gray-100 dark:prose-pre:bg-gray-800"
+                className="prose prose-lg dark:prose-invert max-w-none prose-headings:text-gray-900 dark:prose-headings:text-white prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-code:text-gray-900 dark:prose-code:text-gray-100 prose-pre:bg-gray-100 dark:prose-pre:bg-gray-800 prose-img:rounded-lg prose-img:shadow-lg"
                 dangerouslySetInnerHTML={{ __html: postData.contentHtml || '' }} 
               />
             </article>

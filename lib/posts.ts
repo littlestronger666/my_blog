@@ -20,9 +20,9 @@ export interface PostData {
 export function getSortedPostsData(): PostData[] {
   const fileNames = fs.readdirSync(postsDirectory);
   const allPostsData = fileNames
-    .filter(fileName => fileName.endsWith('.md'))
+    .filter(fileName => fileName.endsWith('.md') || fileName.endsWith('.mdx'))
     .map((fileName) => {
-      const id = fileName.replace(/\.md$/, '');
+      const id = fileName.replace(/\.(md|mdx)$/, '');
       const fullPath = path.join(postsDirectory, fileName);
       const fileContents = fs.readFileSync(fullPath, 'utf8');
       const matterResult = matter(fileContents);
@@ -41,11 +41,11 @@ export function getSortedPostsData(): PostData[] {
 export function getAllPostIds() {
   const fileNames = fs.readdirSync(postsDirectory);
   return fileNames
-    .filter(fileName => fileName.endsWith('.md'))
+    .filter(fileName => fileName.endsWith('.md') || fileName.endsWith('.mdx'))
     .map((fileName) => {
       return {
         params: {
-          id: fileName.replace(/\.md$/, ''),
+          id: fileName.replace(/\.(md|mdx)$/, ''),
         },
       };
     });
@@ -53,10 +53,20 @@ export function getAllPostIds() {
 
 // 获取单篇文章（用于详情页）
 export async function getPostData(id: string): Promise<PostData> {
-  const fullPath = path.join(postsDirectory, `${id}.md`);
+  // 尝试 .mdx 文件，如果不存在则尝试 .md 文件
+  let fullPath = path.join(postsDirectory, `${id}.mdx`);
+  if (!fs.existsSync(fullPath)) {
+    fullPath = path.join(postsDirectory, `${id}.md`);
+  }
+  
   const fileContents = fs.readFileSync(fullPath, 'utf8');
   const matterResult = matter(fileContents);
-  const processedContent = await remark().use(html).process(matterResult.content);
+  
+  // 将相对路径的图片转换为绝对路径
+  let content = matterResult.content;
+  content = content.replace(/!\[([^\]]*)\]\(\.\/images\//g, '![$1](/images/');
+  
+  const processedContent = await remark().use(html).process(content);
   const contentHtml = processedContent.toString();
   
   return {

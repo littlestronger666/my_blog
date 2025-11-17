@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import createMDX from '@next/mdx';
 
 // 🔧 配置说明：
 // 1. 如果部署在 https://username.github.io/仓库名，设置 REPO_NAME
@@ -17,6 +18,16 @@ const nextConfig: NextConfig = {
   // 生产环境且有仓库名时才添加 basePath
   basePath: isProd && REPO_NAME ? `/${REPO_NAME}` : '',
   assetPrefix: isProd && REPO_NAME ? `/${REPO_NAME}/` : '',
+  // 配置页面扩展名，支持 .mdx
+  pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
 };
 
-export default nextConfig;
+const withMDX = createMDX({
+  // 可以在这里添加 remark 和 rehype 插件
+  options: {
+    remarkPlugins: [],
+    rehypePlugins: [],
+  },
+});
+
+export default withMDX(nextConfig);
